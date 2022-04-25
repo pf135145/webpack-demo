@@ -4,6 +4,13 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const TerserPlugin = require("terser-webpack-plugin")
 
 module.exports = {
+  devServer: {
+    // proxy: {
+    //   "/api": "http://localhost:3000",
+    // },
+    compress: true,
+    hot: true,
+  },
   mode: 'production',
   entry: {
     app: './src/index.js',
@@ -41,7 +48,7 @@ module.exports = {
       filename: 'index.html',
       // chunks: ['app'],
     }),
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
     // new HtmlWebpackPlugin({
     //   title: 'home',
     //   template: 'assets/index.html',

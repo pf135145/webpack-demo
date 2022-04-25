@@ -1,4 +1,4 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 // import '../assets/style.css';
 
 function component() {
@@ -10,6 +10,13 @@ function component() {
   return element;
 }
 
-console.log(_.join([1,2,3]))
+// console.log(_.join([1,2,3]))
 
 document.body.appendChild(component());
+
+document.getElementById('aBtn').onclick = function () {
+  //异步加载A
+  import('./comp/a.js').then((data) => {
+    console.log(data.default)
+  })
+}
