@@ -4,6 +4,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const TerserPlugin = require("terser-webpack-plugin")
 
 module.exports = {
+  devtool: 'cheap-source-map',
   devServer: {
     // proxy: {
     //   "/api": "http://localhost:3000",
@@ -20,24 +21,34 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        extractComments: false
+        extractComments: false,
       })
     ],
+    splitChunks:{
+      chunks: 'initial'
+    }
   },
-  externals: {
-    lodash: '_'
-  },
+  // externals: {
+  //   lodash: '_'
+  // },
   output: {
     filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
     ],
   },
   plugins: [
