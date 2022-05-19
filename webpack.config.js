@@ -5,13 +5,13 @@ const TerserPlugin = require("terser-webpack-plugin")
 
 module.exports = {
   devtool: 'source-map',
-  devServer: {
+  // devServer: {
     // proxy: {
     //   "/api": "http://localhost:3000",
     // },
-    compress: true,
-    hot: true,
-  },
+  //   compress: true,
+  //   hot: true,
+  // },
   mode: 'development',
   entry: {
     app: './src/index.js',
@@ -32,22 +32,31 @@ module.exports = {
   // externals: {
   //   lodash: '_'
   // },
-  // output: {
-  //   filename: '[name].js',
-  //   // chunkFilename: '[name].[chunkhash].js',
-  //   // path: path.resolve(__dirname, 'dist'),
-  //   clean: true
-  // },
+  output: {
+    filename: '[name].js',
+    // chunkFilename: '[name].[chunkhash].js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true
+  },
   module: {
     rules: [
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //     options: {
+      //       presets: ['@babel/preset-env']
+      //     }
+      //   }
+      // },
       {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
+        test: /\.js$/,
         use: {
-          loader: 'babel-loader',
+          loader: require.resolve('./src/loaders/loader1.js'),
           options: {
-            presets: ['@babel/preset-env']
-          }
+                  presets: ['@babel/preset-env']
+                }
         }
       }
     ],
