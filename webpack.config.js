@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require("terser-webpack-plugin")
+const HelloWorldPlugin = require('./src/plugins/hello');
 
 module.exports = {
   devtool: 'source-map',
@@ -34,7 +35,7 @@ module.exports = {
   // },
   output: {
     filename: '[name].js',
-    // chunkFilename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
@@ -69,6 +70,7 @@ module.exports = {
       filename: 'index.html',
       // chunks: ['app'],
     }),
+    new HelloWorldPlugin({ options: true })
     // new BundleAnalyzerPlugin()
     // new HtmlWebpackPlugin({
     //   title: 'home',

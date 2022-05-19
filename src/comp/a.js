@@ -1,4 +1,3 @@
-import { obj2 } from './b.js';
 const obj = {
   name: 'lisi',
   sayHi
@@ -6,5 +5,5 @@ const obj = {
 function sayHi() {
   console.log('A')
 }
-obj2.sayHi()
+obj.sayHi()
 export { obj }
